@@ -1,5 +1,8 @@
 
 
+from re import A
+
+
 class Buscaminas():
     def __init__(self,rows,columns,bombs):
         self.rows=rows
@@ -40,6 +43,8 @@ class Buscaminas():
         return False    
 
     def question(self,movs):
+       #desarrollar logica por si el pelotudo selecciona una bomba
+       # tiene que levantar una excepcion 
         mov=str(input("seleccione el tipo de jugada"))
 
         row=int(input("seleccione la fila de su jugada"))
@@ -49,8 +54,19 @@ class Buscaminas():
         return mov,row,col
        
 
+    def play(self,mov,row,col):
+        if mov == 'uncover':
+            self.show[row][col] =str(self.board[row][col])
+        if mov == 'flag':
+            self.show[row][col] = 'F'
+        for i in range (8):
+            print(self.board[i])
+    
+    def play_to_show():
+        pass
 
 
+    
     def proximity_bombs(self):
         count=0
  
@@ -89,9 +105,9 @@ class Buscaminas():
         self.board[3][4]="B"
 
 
-a1=Buscaminas(8,8,10)    
-a1.set()
+#a1=Buscaminas(8,8,10)    
+#a1.set()
 #print(a1.caso1)
-a1.proximity_bombs()
-for i in range (8):
-     print(a1.board[i])
+#a1.proximity_bombs()
+#for i in range (8):
+#     print(a1.board[i])
