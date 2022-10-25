@@ -51,7 +51,17 @@ class TemaMusical:
           if (interprete==''):
                raise EmptyError 
           self._interprete=interprete   
-
+     def __str__(self):
+          a="codigo: "+str(self.codigo)+"\n\tnombre: "+str(self.nombre)+"\n\tduracion: "+str(self.duracion)+"\n\tinterprete: "+str(self.interprete)+"\n"
+          return a
+     def input(self,valor=None,codigo=None,nombre=None,duracion=None,interprete=None):
+          if valor== False or valor==None: 
+               self.codigo=str(input("escriba el codigo"))
+          self.nombre=str(input("escriba el nombre"))
+          self.duracion=str(input("escriba la duracion"))
+          self.interprete=str(input("escriba el interprete"))
+          
+          
         
 class Error(Exception):
      """Base class for other exceptions"""
@@ -61,8 +71,10 @@ class EmptyError(Error):
      pass
 
 p1= TemaMusical()
-p1._duracion=-1
-print(p1._duracion)
+
+#print(p1.__str__())
+
+
 
 # class Geeks: 
 #      def __init__(self): 
