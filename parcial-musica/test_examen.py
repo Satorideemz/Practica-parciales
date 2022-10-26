@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
-from tema_musical import TemaMusical, EmptyError
-from lista_musical import ListaMusical
+from tema_musical import TemaMusical, EmptyError, ValueError
+from lista_musical import ListaMusical,KeyError
 from parameterized import parameterized
 
 
@@ -31,10 +31,10 @@ class TestMusical(unittest.TestCase):
 # # la siguiente función testea que no se pueda asignar un valor negativo a
 # # la duracion de un objeto TemaMusical
 
-    # def test_tema_set_duracion_negativa(self):
-    #      tema = TemaMusical()
-    #      with self.assertRaises(ValueError):
-    #         tema.duracion = -1
+    def test_tema_set_duracion_negativa(self):
+         tema = TemaMusical()
+         with self.assertRaises(ValueError):
+            tema.duracion = -1
 # # la siguiente función testea que no se pueda asignar un valor vacío a un
 # # interprete de un objeto TemaMusical
 
@@ -92,12 +92,12 @@ class TestMusical(unittest.TestCase):
         lista.add(self.t2)
         self.assertDictEqual(lista.temas, self.dict_modelo)
 
-#    def test_lista_add_error(self):
-#        lista = ListaMusical()
-#        lista.add(self.t1)
-#        with self.assertRaises(KeyError):
-#            lista.add(self.t1)
-# # la función update modifica un objeto TemaMusical de un objeto ListaMusical
+    def test_lista_add_error(self):
+       lista = ListaMusical()
+       lista.add(self.t1)
+       with self.assertRaises(KeyError):
+           lista.add(self.t1)
+# la función update modifica un objeto TemaMusical de un objeto ListaMusical
 
     def test_lista_update_ok(self):
         lista = ListaMusical()
@@ -107,11 +107,11 @@ class TestMusical(unittest.TestCase):
         lista.update(self.t2, self.t2.codigo)
         self.assertDictEqual(lista.temas, self.dict_modelo)
 
-#     def test_lista_update_error(self):
-#         lista = ListaMusical()
-#         lista.add(self.t1)
-#         with self.assertRaises(KeyError):
-#             lista.update(self.t2, self.t2.codigo)
+    def test_lista_update_error(self):
+        lista = ListaMusical()
+        lista.add(self.t1)
+        with self.assertRaises(KeyError):
+            lista.update(self.t2, self.t2.codigo)
 # # la función delete elimina del objeto ListaMusical un objeto TemaMusical
 # # según el id enviado
 
@@ -123,12 +123,12 @@ class TestMusical(unittest.TestCase):
         lista.delete('newkey')
         self.assertDictEqual(lista.temas, self.dict_modelo)
 
-#     def test_lista_delete_error(self):
-#         lista = ListaMusical()
-#         lista.add(self.t1)
-#         lista.add(self.t2)
-#         with self.assertRaises(KeyError):
-#             lista.delete('newkey')
+    def test_lista_delete_error(self):
+        lista = ListaMusical()
+        lista.add(self.t1)
+        lista.add(self.t2)
+        with self.assertRaises(KeyError):
+            lista.delete('newkey')
 # # la funcion find_by_id devuelve un objeto TemaMusical del id indicado
 
     def test_lista_find_by_id_ok(self):
@@ -137,11 +137,11 @@ class TestMusical(unittest.TestCase):
         lista.add(self.t2)
         self.assertEqual(lista.find_by_id(self.t1.codigo), self.t1)
 
-#     def test_lista_find_by_id_error(self):
-#         lista = ListaMusical()
-#         lista.add(self.t1)
-#         with self.assertRaises(KeyError):
-#             lista.find_by_id('newkey')
+    def test_lista_find_by_id_error(self):
+        lista = ListaMusical()
+        lista.add(self.t1)
+        with self.assertRaises(KeyError):
+            lista.find_by_id('newkey')
 # # la función find_all() devuelve una lista con todos los temas del objeto
 # # ListaMusical
 
